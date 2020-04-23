@@ -1,5 +1,4 @@
 <?php
-
 class ControllerApiB24Chat extends Controller
 {
     public function story()
