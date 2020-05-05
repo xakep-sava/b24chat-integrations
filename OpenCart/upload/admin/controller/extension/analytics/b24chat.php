@@ -125,12 +125,5 @@ class ControllerExtensionAnalyticsB24Chat extends Controller
 
     // custom
     $this->model_setting_event->deleteEventByCode('b24chat_soconfig_add_cart');
-
-    // old
-    $this->model_setting_event->deleteEventByCode('b24chat_add_cart2');
-    $this->model_setting_event->deleteEventByCode('b24chat_add_cart_before');
-    $this->model_setting_event->deleteEventByCode('b24chat_add_cart_api');
-    $this->model_setting_event->deleteEventByCode('b24chat_add_cart_api_before');
-    $this->model_setting_event->deleteEventByCode('b24chat_add_cart_soconfig_after');
   }
 }
