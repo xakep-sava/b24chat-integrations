@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <name>B24 Chat</name>
+    <code>b24chat-oc3x</code>
+    <version>1.0.0</version>
+    <author>b24chat.com</author>
+    <link>https://b24chat.com</link>
+    <file path="catalog/controller/checkout/cart.php">
+        <operation error="log">
+            <search><![CDATA[public function edit() {]]></search>
+            <add position="after"><![CDATA[                $this->event->trigger('b24chat/cart/edit', ['checkout/cart/edit', [$this->cart->getProducts(), $this->request->post]]);]]></add>
+        </operation>
+        <operation error="log">
+            <search index="2"><![CDATA[$this->response->addHeader('Content-Type: application/json');]]></search>
+            <add position="before"><![CDATA[               $this->event->trigger('b24chat/cart/remove', ['checkout/cart/remove', [$this->cart, $this->request->post]]);
+]]></add>
+        </operation>
+<!--        <operation error="log">-->
+<!--            <search index="0"><![CDATA[                }-->
+
+<!--                $this->response->addHeader('Content-Type: application/json');]]></search>-->
+<!--            <add position="before"><![CDATA[                        $this->event->trigger('b24chat/cart/add', ['checkout/cart/add', [$product_info, $this->request->post]]);]]></add>-->
+<!--        </operation>-->
+    </file>
+<!--    <file path="catalog/controller/extension/soconfig/cart.php" error="skip">-->
+<!--    error="log"-->
+<!--    </file>-->
+<!--    <file path="catalog/controller/extension/soconfig/cart.php" error="skip">-->
+
+<!--    </file>-->
+</modification>
