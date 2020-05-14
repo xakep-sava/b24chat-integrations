@@ -98,7 +98,7 @@ class ControllerExtensionAnalyticsB24Chat extends Controller
     // TODO: async curl
     try {
       $data = json_encode(array_merge(['action' => $action], $data));
-      $ch = curl_init('https://chat.b24online.com/api/v1/webhook/opencart'); // TODO: url from config
+      $ch = curl_init('https://b24chat.com/api/v1/webhook/opencart'); // TODO: url from config
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
       curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
