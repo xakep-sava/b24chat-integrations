@@ -1,0 +1,24 @@
+{
+    "name": "b24chat/magento2-integration",
+    "description": "Integration of Magento 2 with B24Chat",
+    "version": "1.0.0",
+    "license": ["ISC"],
+    "authors": [
+        {
+            "name": "Vladimir Savrov",
+            "email": "i@sava.team"
+        }
+    ],
+    "require": {
+        "php": "~7.0.*||~7.2.0||~7.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0.0"
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "B24Chat\\Integration\\": ""
+        }
+    }
+}

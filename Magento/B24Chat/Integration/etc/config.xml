@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <b24chat_integration>
+            <general>
+                <enabled>0</enabled>
+                <token><![CDATA[]]></token>
+                <api_url><![CDATA[https://b24chat.com]]></api_url>
+            </general>
+        </b24chat_integration>
+    </default>
+</config>

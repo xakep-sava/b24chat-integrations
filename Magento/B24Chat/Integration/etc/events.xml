@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_cart_add_product_complete">
+        <observer name="b24chat_cart_add_product" instance="B24Chat\Integration\Observer\AddOrUpdateCart"/>
+    </event>
+    <event name="checkout_cart_update_item_complete">
+        <observer name="b24chat_cart_update_product" instance="B24Chat\Integration\Observer\AddOrUpdateCart"/>
+    </event>
+    <event name="customer_register_success">
+        <observer name="b24chat_success_register" instance="B24Chat\Integration\Observer\SuccessRegister"/>
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="b24chat_checkout_controller_success" instance="B24Chat\Integration\Observer\CheckoutSuccess"/>
+    </event>
+    <event name="multishipping_checkout_controller_success_action">
+        <observer name="b24chat_multishipping_controller_success"
+                  instance="B24Chat\Integration\Observer\CheckoutSuccess"/>
+    </event>
+</config>
