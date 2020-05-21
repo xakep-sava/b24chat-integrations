@@ -1,0 +1,3 @@
+[submodule "Magento/B24Chat/Integration"]
+	path = Magento/B24Chat/Integration
+	url = git@github.com:xakep-sava/b24chat-magento2.git
