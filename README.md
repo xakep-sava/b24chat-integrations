@@ -3,5 +3,8 @@
 Modules for integration with b24chat.com
 
 Available modules:
-- OpenCart
-- Magento 2.x
+- OpenCart 3.x
+- Magento 1.x and 2.x
+
+Coming soon:
+- WordPress
