@@ -18,7 +18,6 @@ use \B24Chat\Integration\Helper\Data as Helper;
 
 class CheckoutSuccess implements Event\ObserverInterface
 {
-    protected $_customerSession;
     protected $_scopeConfig;
     protected $_helper;
 

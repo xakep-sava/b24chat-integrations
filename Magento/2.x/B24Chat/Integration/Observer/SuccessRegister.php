@@ -17,7 +17,6 @@ use \B24Chat\Integration\Helper\Data as Helper;
 
 class SuccessRegister implements Event\ObserverInterface
 {
-    protected $_customerSession;
     protected $_scopeConfig;
     protected $_helper;
 
