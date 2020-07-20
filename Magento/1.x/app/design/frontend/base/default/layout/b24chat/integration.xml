@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="b24chat_integration/script" name="b24chat_script" after="-"/>
+        </reference>
+    </default>
+</layout>
