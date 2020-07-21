@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+        <resource_groups>
+            <b24chat_integration translate="title" module="b24chat_integration">
+                <title>B24Chat Integration</title>
+                <sort_order>10</sort_order>
+                <children>
+                    <b24chat_integration_orders translate="title" module="b24chat_integration">
+                        <title>Orders</title>
+                        <sort_order>10</sort_order>
+                    </b24chat_integration_orders>
+                </children>
+            </b24chat_integration>
+        </resource_groups>
+        <resources>
+            <b24chat_integration_orders translate="title" module="b24chat_integration">
+                <group>b24chat_integration</group>
+                <model>b24chat_integration/api2_order</model>
+                <filter>b24chat_integration/api2_order_filter</filter>
+                <title>Orders</title>
+                <sort_order>10</sort_order>
+                <versions>1</versions>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes translate="website_id name" module="b24chat_integration">
+                    <website_id>Website ID</website_id>
+                    <name>Name</name>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/b24chat/websites</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+            </b24chat_integration_orders>
+        </resources>
+    </api2>
+</config>
