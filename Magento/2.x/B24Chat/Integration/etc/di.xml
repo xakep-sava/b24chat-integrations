@@ -11,6 +11,6 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="B24Chat_Integration" setup_version="1.0.0"/>
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="B24Chat\Integration\Api\GetProductImage" type="B24Chat\Integration\Model\GetProductImageUrl"/>
 </config>
