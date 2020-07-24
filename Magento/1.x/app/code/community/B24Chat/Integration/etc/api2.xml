@@ -6,19 +6,23 @@
                 <title>B24Chat Integration</title>
                 <sort_order>10</sort_order>
                 <children>
-                    <b24chat_integration_orders translate="title" module="b24chat_integration">
-                        <title>Orders</title>
+                    <b24chat_integration_websites translate="title" module="b24chat_integration">
+                        <title>Websites</title>
                         <sort_order>10</sort_order>
-                    </b24chat_integration_orders>
+                    </b24chat_integration_websites>
+                    <b24chat_integration_report_viewed_products translate="title" module="b24chat_integration">
+                        <title>Report Viewed Product</title>
+                        <sort_order>20</sort_order>
+                    </b24chat_integration_report_viewed_products>
                 </children>
             </b24chat_integration>
         </resource_groups>
         <resources>
-            <b24chat_integration_orders translate="title" module="b24chat_integration">
+            <b24chat_integration_websites translate="title" module="b24chat_integration">
                 <group>b24chat_integration</group>
-                <model>b24chat_integration/api2_order</model>
-                <filter>b24chat_integration/api2_order_filter</filter>
-                <title>Orders</title>
+                <model>b24chat_integration/api2_websites</model>
+                <filter>b24chat_integration/api2_websites_websites</filter>
+                <title>Websites</title>
                 <sort_order>10</sort_order>
                 <versions>1</versions>
                 <privileges>
@@ -31,12 +35,37 @@
                     <name>Name</name>
                 </attributes>
                 <routes>
-                    <route_collection>
+                    <route>
                         <route>/b24chat/websites</route>
                         <action_type>collection</action_type>
-                    </route_collection>
+                    </route>
                 </routes>
-            </b24chat_integration_orders>
+            </b24chat_integration_websites>
+            <b24chat_integration_report_viewed_products translate="title" module="b24chat_integration">
+                <group>b24chat_integration</group>
+                <model>b24chat_integration/api2_reportViewedProducts</model>
+                <filter>b24chat_integration/api2_reportViewedProducts</filter>
+                <title>Report Viewed Products</title>
+                <sort_order>20</sort_order>
+                <versions>1</versions>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes translate="userId productId rating timestamp" module="b24chat_integration">
+                    <userId>Customer ID</userId>
+                    <productId>Product ID</productId>
+                    <rating>Count of product views</rating>
+                    <timestamp>Added at</timestamp>
+                </attributes>
+                <routes>
+                    <route>
+                        <route>/b24chat/report/viewed_products</route>
+                        <action_type>collection</action_type>
+                    </route>
+                </routes>
+            </b24chat_integration_report_viewed_products>
         </resources>
     </api2>
 </config>
