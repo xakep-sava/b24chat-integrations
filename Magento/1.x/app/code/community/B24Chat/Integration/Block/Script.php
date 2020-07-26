@@ -9,21 +9,19 @@ class B24Chat_Integration_Block_Script extends Mage_Core_Block_Template
             return '';
         }
 
-        return $this->getJS($helper->getToken(), $helper->getApiUrl());
+        return $this->getJS($helper);
     }
 
-    private function getJS($token, $apiUrl)
+    private function getJS($helper)
     {
         $customerInfo = '';
-
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-            $customerId = Mage::getSingleton('customer/session')->getId();
-            $customerEmail = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
-            $customerInfo = '<script>window.B24Chat = { customer: { id: ' . $customerId . ', email: \'' . $customerEmail
-                . '\'} }</script>';
+        if ($customer = $helper->getCustomer()) {
+            $customerInfo = '<script>window.B24Chat = { customer: { id: ' . $customer->getId() . ', email: \'' .
+                $customer->getEmail() . '\'} }</script>';
         }
 
-        return '<script src="' . $apiUrl . '/init.js" api="{&quot;url&quot;:&quot;' . $apiUrl . '/&quot;,' .
-            '&quot;widgets&quot;:{&quot;token&quot;:&quot;' . $token . '&quot;}}"></script>' . $customerInfo;
+        return '<script src="' . $helper->getApiUrl() . '/init.js" api="{&quot;url&quot;:&quot;' . $helper->getApiUrl()
+            . '/&quot;,&quot;widgets&quot;:{&quot;token&quot;:&quot;' . $helper->getToken() . '&quot;}}"></script>'
+            . $customerInfo;
     }
 }

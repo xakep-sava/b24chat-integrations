@@ -27,6 +27,12 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig('b24chat_integration/general/api_url');
     }
 
+    public function getCustomer() {
+        $customerSession = Mage::getSingleton('customer/session');
+
+        return $customerSession->isLoggedIn() ? $customerSession->getCustomer() : null;
+    }
+
     public function sendData($action = 'none', $data = [])
     {
         // TODO: защита токеном от спама

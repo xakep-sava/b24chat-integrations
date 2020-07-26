@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<widgets>
+    <b24chat_integration_recommendedProducts type="b24chat_integration/recommendedProducts">
+        <name>B24 Chat Recommended Products</name>
+        <description>Lists recommended products for user</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <products_count translate="label">
+                <required>1</required>
+                <visible>1</visible>
+                <value>12</value>
+                <label>Number of products to display</label>
+                <type>text</type>
+            </products_count>
+            <col_count>
+                <required>1</required>
+                <visible>1</visible>
+                <value>4</value>
+                <label>Number of products in row</label>
+                <type>text</type>
+            </col_count>
+<!--            <sku_products>-->
+<!--                <required>1</required>-->
+<!--                <visible>1</visible>-->
+<!--                <label>Sku Products</label>-->
+<!--                <description>HR1212, HR1313</description>-->
+<!--                <type>text</type>-->
+<!--            </sku_products>-->
+<!--            <template>-->
+<!--                <required>1</required>-->
+<!--                <visible>1</visible>-->
+<!--                <label>Template</label>-->
+<!--                <type>text</type>-->
+<!--                <value>b24chat/integration/recommended_products.phtml</value>-->
+<!--&lt;!&ndash;                <values>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <default translate="label">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <value>integration/recommended_products.phtml</value>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Special Products Grid Template</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </default>&ndash;&gt;-->
+<!--&lt;!&ndash;                </values>&ndash;&gt;-->
+<!--            </template>-->
+            <cache_lifetime translate="label description">
+                <label>Cache Lifetime (Seconds)</label>
+                <description>86400 by default, if not set. To refresh instantly, Clear the Blocks HTML Output Cache.</description>
+                <visible>1</visible>
+                <type>text</type>
+                <value>86400</value>
+            </cache_lifetime>
+        </parameters>
+    </b24chat_integration_recommendedProducts>
+</widgets>
