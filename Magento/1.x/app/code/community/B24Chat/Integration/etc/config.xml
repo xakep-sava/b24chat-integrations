@@ -33,6 +33,15 @@
         </events>
     </global>
     <frontend>
+        <translate>
+            <modules>
+                <B24Chat_Integration>
+                    <files>
+                        <default>b24chat/B24Chat_Integration.csv</default>
+                    </files>
+                </B24Chat_Integration>
+            </modules>
+        </translate>
         <layout>
             <updates>
                 <b24chat_integration>
