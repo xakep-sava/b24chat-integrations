@@ -1,0 +1,66 @@
+<?php if (Mage::app()->getLocale()->getLocaleCode() === 'en_US' && $interactiveText = $this->getInteractiveText()) : ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var interactiveText = <?= $interactiveText ?>;
+            var interactiveBlock = document.querySelector('#b24chat-interactive');
+
+            if (interactiveBlock) {
+                typing(interactiveText.map(text => text.value.content), interactiveBlock)
+            }
+        })
+
+        function typing(contents, element) {
+            var step = 0;
+            var stepIndex = 0;
+            var interval;
+
+            function Type() {
+                var text = contents[step].substring(0, stepIndex + 1);
+                element.innerHTML = text;
+                stepIndex++;
+
+                if (text === contents[step]) {
+                    clearInterval(interval);
+                    setTimeout(function () {
+                        interval = setInterval(Delete, 50);
+                    }, 1000);
+                }
+            }
+
+            function Delete() {
+                var text = contents[step].substring(0, stepIndex - 1);
+                element.innerHTML = text;
+                stepIndex--;
+
+                if (text === '') {
+                    clearInterval(interval);
+
+                    step = step === (contents.length - 1) ? 0 : step + 1
+                    stepIndex = 0;
+
+                    setTimeout(function () {
+                        interval = setInterval(Type, 100);
+                    }, 200);
+                }
+            }
+
+            interval = setInterval(Type, 100);
+        }
+    </script>
+    <div style="display: inline-block">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+             width="35" height="35"
+             viewBox="0 0 172 172"
+             style="position: relative; top: 6px;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+               stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+               font-family="none" font-size="none" style="mix-blend-mode: normal">
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#e74c3c">
+                    <path d="M86,14.33333c-7.91608,0 -14.33333,6.41725 -14.33333,14.33333c0.00405,5.11676 2.73542,9.84332 7.16667,12.40169v16.26497h-21.5c-15.74756,0 -28.66667,12.91911 -28.66667,28.66667v28.66667h-14.33333v14.33333h14.33333v14.33333c0,7.83362 6.49972,14.33333 14.33333,14.33333h86c7.83362,0 14.33333,-6.49972 14.33333,-14.33333v-14.33333h14.33333v-14.33333h-14.33333v-28.66667c0,-15.74756 -12.91911,-28.66667 -28.66667,-28.66667h-21.5v-16.27897c4.42692,-2.55587 7.15763,-7.27594 7.16667,-12.3877c0,-7.91608 -6.41725,-14.33333 -14.33333,-14.33333zM57.33333,71.66667h21.5h14.33333h21.5c8.00277,0 14.33333,6.33056 14.33333,14.33333v57.33333h-21.5v-14.33333h-43v14.33333h-21.5v-57.33333c0,-8.00277 6.33056,-14.33333 14.33333,-14.33333zM68.08333,93.16667c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM103.91667,93.16667c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75z"></path>
+                </g>
+            </g>
+        </svg>
+        <span id="b24chat-interactive"></span>
+    </div>
+<?php endif; ?>

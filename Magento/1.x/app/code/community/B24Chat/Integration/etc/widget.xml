@@ -3,7 +3,6 @@
     <b24chat_integration_recommendedProducts type="b24chat_integration/recommendedProducts">
         <name>B24 Chat Recommended Products</name>
         <description>Lists recommended products for user</description>
-        <is_email_compatible>1</is_email_compatible>
         <parameters>
             <products_count translate="label">
                 <required>1</required>
@@ -48,4 +47,67 @@
             </cache_lifetime>
         </parameters>
     </b24chat_integration_recommendedProducts>
+    <b24chat_integration_interactive type="b24chat_integration/interactive">
+        <name>B24 Chat Interactive Block</name>
+        <description>Bot writes messages according to the script</description>
+        <parameters>
+            <scenario_id translate="label">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Scenario ID</label>
+                <type>text</type>
+            </scenario_id>
+            <typing_speed>
+                <required>1</required>
+                <visible>1</visible>
+                <value>50</value>
+                <label>Typing speed</label>
+                <type>text</type>
+                <value>1</value>
+            </typing_speed>
+            <repeat_scenario translate="label">
+                <required>0</required>
+                <visible>1</visible>
+                <value>true</value>
+                <label>Repeat scenario</label>
+                <type>select</type>
+                <value>1</value>
+                <values>
+                    <default translate="label">
+                        <value>1</value>
+                        <label>Yes</label>
+                    </default>
+                    <link_inline translate="label">
+                        <value>0</value>
+                        <label>No</label>
+                    </link_inline>
+                </values>
+            </repeat_scenario>
+            <random_steps translate="label">
+                <required>0</required>
+                <visible>1</visible>
+                <value>true</value>
+                <label>Random steps from scenario</label>
+                <type>select</type>
+                <value>0</value>
+                <values>
+                    <default translate="label">
+                        <value>1</value>
+                        <label>Yes</label>
+                    </default>
+                    <link_inline translate="label">
+                        <value>0</value>
+                        <label>No</label>
+                    </link_inline>
+                </values>
+            </random_steps>
+            <cache_lifetime translate="label description">
+                <label>Cache Lifetime (Seconds)</label>
+                <description>86400 by default, if not set. To refresh instantly, Clear the Blocks HTML Output Cache.</description>
+                <visible>1</visible>
+                <type>text</type>
+                <value>86400</value>
+            </cache_lifetime>
+        </parameters>
+    </b24chat_integration_interactive>
 </widgets>

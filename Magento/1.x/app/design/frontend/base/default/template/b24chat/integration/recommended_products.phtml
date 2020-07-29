@@ -1,11 +1,15 @@
 <?php if (count($this->getProducts())): ?>
     <?php $_params = $this->escapeHtml(json_encode(array('form_key' => $this->getFormKey()))) ?>
-    <div class="widget widget-new-products">
+    <div class="widget widget-recommendations-products">
         <div class="widget-title">
-            <h2><?php echo $this->__('Recommended Products') ?></h2>
+            <h2 style="display: inline-block; margin-right: 10px;"><?= $this->__('Recommended Items') ?></h2>
+            <?= $this->getLayout()
+                ->createBlock('b24chat_integration/interactive')
+                ->setScenarioId(547)
+                ->toHtml() ?>
         </div>
         <div class="widget-products">
-            <?php echo $this->getPagerHtml() ?>
+            <?= $this->getPagerHtml() ?>
             <?php $_columnCount = $this->getColumnCount(); ?>
             <?php $i = 0;
             foreach ($this->getProducts() as $_product): ?>
@@ -13,35 +17,35 @@
                     <ul class="products-grid">
                 <?php endif ?>
                 <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
-                    <a href="<?php echo $_product->getProductUrl() ?>"
-                       title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"
+                    <a href="<?= $_product->getProductUrl() ?>"
+                       title="<?= $this->stripTags($_product->getName(), null, true) ?>"
                        class="product-image"><img
-                                src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(85) ?>"
+                                src="<?= $this->helper('catalog/image')->init($_product, 'small_image')->resize(85) ?>"
                                 width="85" height="85"
-                                alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/></a>
-                    <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>"
-                                                title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?></a>
+                                alt="<?= $this->stripTags($_product->getName(), null, true) ?>"/></a>
+                    <h3 class="product-name"><a href="<?= $_product->getProductUrl() ?>"
+                                                title="<?= $this->stripTags($_product->getName(), null, true) ?>)"><?= $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?></a>
                     </h3>
-                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                    <?= $this->getReviewsSummaryHtml($_product, 'short') ?>
                     <?= $this->getLayout()->createBlock('catalog/product_price')
                         ->setTemplate('catalog/product/price.phtml')
                         ->setProduct($_product)
                         ->setDisplayMinimalPrice(true)
-                        ->setIdSuffix($idSuffix='-widget-new-grid')
+                        ->setIdSuffix($idSuffix='-widget-recommendations-grid')
                         ->toHtml(); ?>
                     <div class="actions">
                         <?php if ($_product->isSaleable()): ?>
                             <button type="button"
-                                    title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add to Cart')) ?>"
+                                    title="<?= Mage::helper('core')->quoteEscape($this->__('Add to Cart')) ?>"
                                     class="button btn-cart"
                                     onclick="customFormSubmit(
-                                            '<?php echo $this->getAddToCartUrlCustom($_product, array(), false) ?>',
-                                            '<?php echo $_params ?>',
+                                            '<?= $this->getAddToCartUrlCustom($_product, array(), false) ?>',
+                                            '<?= $_params ?>',
                                             'post')">
-                                <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                <span><span><?= $this->__('Add to Cart') ?></span></span>
                             </button>
                         <?php else: ?>
-                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span>
+                            <p class="availability out-of-stock"><span><?= $this->__('Out of stock') ?></span>
                             </p>
                         <?php endif; ?>
                         <ul class="add-to-links">
@@ -50,10 +54,10 @@
                                     <a href="#"
                                        class="link-wishlist"
                                        onclick="customFormSubmit(
-                                               '<?php echo $this->getAddToWishlistUrlCustom($_product, false) ?>',
-                                               '<?php echo $_params ?>',
+                                               '<?= $this->getAddToWishlistUrlCustom($_product, false) ?>',
+                                               '<?= $_params ?>',
                                                'post')">
-                                        <?php echo $this->__('Add to Wishlist') ?>
+                                        <?= $this->__('Add to Wishlist') ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -63,10 +67,10 @@
                                     <a href="#"
                                        class="link-compare"
                                        onclick="customFormSubmit(
-                                               '<?php echo $_compareUrl ?>',
-                                               '<?php echo $_params ?>',
+                                               '<?= $_compareUrl ?>',
+                                               '<?= $_params ?>',
                                                'post')">
-                                        <?php echo $this->__('Add to Compare') ?>
+                                        <?= $this->__('Add to Compare') ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
