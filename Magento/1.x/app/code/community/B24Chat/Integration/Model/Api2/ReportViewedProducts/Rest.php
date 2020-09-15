@@ -1,6 +1,6 @@
 <?php
 
-class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_Integration_Model_Api2_ReportViewedProducts
+clASs B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_Integration_Model_Api2_ReportViewedProducts
 {
     /**
      * Get report viewed products
@@ -18,10 +18,10 @@ class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_I
             $resource = Mage::getSingleton('core/resource');
             $readConnection = $resource->getConnection('core_read');
 
-            $query = 'SELECT customer_id as userId, Viewed.product_id as productId, rating, timestamp FROM '
-                . '(SELECT customer_id, product_id, UNIX_TIMESTAMP(added_at) as timestamp FROM '
-                . $resource->getTableName('reports/viewed_product_index') . ' WHERE customer_id IS NOT NULL ) as Viewed '
-                . 'JOIN (SELECT product_id, count(product_id) as rating FROM '
+            $query = 'SELECT customer_id AS userId, Viewed.product_id AS productId, rating, timestamp FROM '
+                . '(SELECT customer_id, product_id, UNIX_TIMESTAMP(added_at) AS timestamp FROM '
+                . $resource->getTableName('reports/viewed_product_index') . ' WHERE customer_id IS NOT NULL ) AS Viewed '
+                . 'JOIN (SELECT product_id, count(product_id) AS rating FROM '
                 . $resource->getTableName('reports/viewed_product_index') . ' '
 
                 // Active

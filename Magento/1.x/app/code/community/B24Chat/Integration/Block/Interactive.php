@@ -15,22 +15,32 @@ class B24Chat_Integration_Block_Interactive extends Mage_Core_Block_Template imp
 
     public function getScenarioId()
     {
-        return $this->_getData('scenario_id') ?? false;
+        return $this->_getData('scenario_id') ?? 0;
     }
 
     public function getRepeatScenario()
     {
-        return $this->_getData('repeat_scenario') ?? true;
+        return $this->_getData('repeat_scenario') ?? 1;
     }
 
     public function getRandomSteps()
     {
-        return $this->_getData('random_steps') ?? false;
+        return $this->_getData('random_steps') ?? 0;
     }
 
     public function getTypingSpeed()
     {
-        return $this->_getData('typing_speed') ?? 50;
+        return $this->_getData('typing_speed') ?? 100;
+    }
+
+    public function getDeleteTypingSpeed()
+    {
+        return $this->_getData('delete_typing_speed') ?? 50;
+    }
+
+    public function getDelayBeforeDelete()
+    {
+        return $this->_getData('delay_before_delete') ?? 1000;
     }
 
     protected function _toHtml()

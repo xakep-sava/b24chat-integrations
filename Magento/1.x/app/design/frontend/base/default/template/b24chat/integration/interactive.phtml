@@ -2,17 +2,27 @@
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             var interactiveText = <?= $interactiveText ?>;
-            var interactiveBlock = document.querySelector('#b24chat-interactive');
+            var element = document.querySelector('#b24chat-interactive');
+            var typingSpeed = parseInt('<?= $this->getTypingSpeed() ?>') || 100;
+            var deleteTypingSpeed = parseInt('<?= $this->getDeleteTypingSpeed() ?>') || 50;
+            var delayBeforeDelete = parseInt('<?= $this->getDelayBeforeDelete() ?>') || 1000;
+            var repeatScenario = parseInt('<?= $this->getRepeatScenario() ?>');
+            var randomSteps = parseInt('<?= $this->getRandomSteps() ?>');
 
-            if (interactiveBlock) {
-                typing(interactiveText.map(text => text.value.content), interactiveBlock)
+            if (element) {
+                typing(interactiveText.map(text => text.value.content), element, typingSpeed, deleteTypingSpeed,
+                    delayBeforeDelete, repeatScenario, randomSteps)
             }
         })
 
-        function typing(contents, element) {
-            var step = 0;
+        function typing(contents, element, typingSpeed, deleteTypingSpeed, delayBeforeDelete, repeatScenario, randomSteps) {
+            var step = randomSteps ? random(contents.length) : 0;
             var stepIndex = 0;
             var interval;
+
+            if (randomSteps && !repeatScenario) {
+                repeatScenario = true;
+            }
 
             function Type() {
                 var text = contents[step].substring(0, stepIndex + 1);
@@ -22,8 +32,8 @@
                 if (text === contents[step]) {
                     clearInterval(interval);
                     setTimeout(function () {
-                        interval = setInterval(Delete, 50);
-                    }, 1000);
+                        interval = setInterval(Delete, deleteTypingSpeed);
+                    }, delayBeforeDelete);
                 }
             }
 
@@ -33,15 +43,21 @@
                 stepIndex--;
 
                 if (text === '') {
+                    var lastStep = contents.length - 1
                     clearInterval(interval);
+                    if (repeatScenario || !repeatScenario && step < lastStep) {
+                        step = randomSteps ? random(contents.length) : (step === lastStep ? 0 : step + 1)
+                        stepIndex = 0;
 
-                    step = step === (contents.length - 1) ? 0 : step + 1
-                    stepIndex = 0;
-
-                    setTimeout(function () {
-                        interval = setInterval(Type, 100);
-                    }, 200);
+                        setTimeout(function () {
+                            interval = setInterval(Type, typingSpeed);
+                        }, 200);
+                    }
                 }
+            }
+
+            function random(max) {
+                return Math.floor(Math.random() * Math.floor(max));
             }
 
             interval = setInterval(Type, 100);

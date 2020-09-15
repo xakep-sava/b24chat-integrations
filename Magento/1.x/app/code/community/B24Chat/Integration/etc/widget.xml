@@ -57,18 +57,30 @@
                 <label>Scenario ID</label>
                 <type>text</type>
             </scenario_id>
-            <typing_speed>
+            <typing_speed translate="label">
                 <required>1</required>
                 <visible>1</visible>
-                <value>50</value>
                 <label>Typing speed</label>
                 <type>text</type>
-                <value>1</value>
+                <value>100</value>
             </typing_speed>
+            <delete_typing_speed translate="label">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Delete typing speed</label>
+                <type>text</type>
+                <value>50</value>
+            </delete_typing_speed>
+            <delay_before_delete translate="label">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Delay before delete</label>
+                <type>text</type>
+                <value>1000</value>
+            </delay_before_delete>
             <repeat_scenario translate="label">
                 <required>0</required>
                 <visible>1</visible>
-                <value>true</value>
                 <label>Repeat scenario</label>
                 <type>select</type>
                 <value>1</value>
@@ -86,7 +98,6 @@
             <random_steps translate="label">
                 <required>0</required>
                 <visible>1</visible>
-                <value>true</value>
                 <label>Random steps from scenario</label>
                 <type>select</type>
                 <value>0</value>
