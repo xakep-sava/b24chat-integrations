@@ -1,6 +1,6 @@
 <?php
 
-clASs B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_Integration_Model_Api2_ReportViewedProducts
+class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_Integration_Model_Api2_ReportViewedProducts
 {
     /**
      * Get report viewed products
