@@ -50,30 +50,6 @@
             </updates>
         </layout>
     </frontend>
-    <adminhtml>
-        <acl>
-            <resources>
-                <all>
-                    <title>Allow Everything</title>
-                </all>
-                <admin>
-                    <children>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <b24chat_integration>
-                                            <title>B24Chat - Integration</title>
-                                        </b24chat_integration>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
-    </adminhtml>
     <default>
         <b24chat_integration>
             <general>
