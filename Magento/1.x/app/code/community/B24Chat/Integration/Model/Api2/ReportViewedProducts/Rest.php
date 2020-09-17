@@ -12,7 +12,7 @@ class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_I
         $cache = Mage::getSingleton('core/cache');
         $key = 'B24Chat_Integration';
 
-        if (!$results = $cache->load($key)) {
+        if ($results = $cache->load($key)) {
             $results = unserialize($results);
         } else {
             $resource = Mage::getSingleton('core/resource');
