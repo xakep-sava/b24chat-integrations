@@ -1,4 +1,4 @@
-<?php if (Mage::app()->getLocale()->getLocaleCode() === 'en_US' && $interactiveText = $this->getInteractiveText()) : ?>
+<?php if ($interactiveText = $this->getInteractiveText()) : ?>
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             var interactiveText = <?= $interactiveText ?>;
@@ -63,7 +63,7 @@
             interval = setInterval(Type, 100);
         }
     </script>
-    <div style="display: inline-block">
+    <div style="display: inline-block" class="b24chat-interactive">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="35" height="35"
              viewBox="0 0 172 172"

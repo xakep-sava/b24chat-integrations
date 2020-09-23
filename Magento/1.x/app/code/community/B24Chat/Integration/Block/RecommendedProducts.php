@@ -26,6 +26,10 @@ class B24Chat_Integration_Block_RecommendedProducts extends Mage_Core_Block_Temp
         $helper = Mage::helper('b24chat_integration');
         $api = Mage::helper('b24chat_integration/api');
 
+        if (!$helper->isEnabled()) {
+            return '';
+        }
+
         $customerId = 0;
         if ($customer = $helper->getCustomer()) {
             $customerId = $customer->getId();

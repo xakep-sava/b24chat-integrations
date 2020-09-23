@@ -3,10 +3,12 @@
     <div class="widget widget-recommendations-products">
         <div class="widget-title">
             <h2 style="display: inline-block; margin-right: 10px;"><?= $this->__('Recommended Items') ?></h2>
-            <?= $this->getLayout()
-                ->createBlock('b24chat_integration/interactive')
-                ->setScenarioId(547) // TODO: брать id из настроек
-                ->toHtml() ?>
+            <?php if ($this->getScenarioId()): ?>
+                <?= $this->getLayout()
+                    ->createBlock('b24chat_integration/interactive')
+                    ->setScenarioId($this->getScenarioId())
+                    ->toHtml() ?>
+            <?php endif; ?>
         </div>
         <div class="widget-products">
             <?= $this->getPagerHtml() ?>
