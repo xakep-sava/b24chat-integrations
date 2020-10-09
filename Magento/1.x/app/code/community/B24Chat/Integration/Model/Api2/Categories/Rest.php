@@ -1,23 +1,22 @@
 <?php
 
-class B24Chat_Integration_Model_Api2_Websites_Rest extends B24Chat_Integration_Model_Api2_Websites
+class B24Chat_Integration_Model_Api2_Categories_Rest extends B24Chat_Integration_Model_Api2_Categories
 {
     /**
-     * Get websites
+     * Get categories
      *
      * @return array
      */
     protected function _retrieveCollection()
     {
         $cache = Mage::getSingleton('core/cache');
-        $key = 'B24Chat_Integration_websites_' . Mage::helper('core')
+        $key = 'B24Chat_Integration_categories_' . Mage::helper('core')
                 ->jsonEncode((Mage::app()->getRequest()->getParams()));
 
         if ($results = $cache->load($key)) {
             $results = unserialize($results);
         } else {
             $results = $this->_getCollectionForRetrieve()->load()->toArray();
-            $results = $results['items'] ? $results['items'] : [];
             $cache->save(serialize($results), $key, [], 60 * 60);
         }
 
@@ -27,12 +26,13 @@ class B24Chat_Integration_Model_Api2_Websites_Rest extends B24Chat_Integration_M
     /**
      * Retrieve collection instances
      *
-     * @return Mage_Core_Model_Resource_Website_Collection
+     * @return Mage_Catalog_Model_Resource_Category_Collection
      */
     protected function _getCollectionForRetrieve()
     {
-        /** @var $collection Mage_Core_Model_Resource_Website_Collection */
-        $collection = Mage::getResourceModel('core/website_collection');
+        /** @var $collection Mage_Catalog_Model_Resource_Category_Collection */
+        $collection = Mage::getResourceModel('catalog/category_collection')
+            ->addAttributeToSelect('*');
         $this->_applyCollectionModifiers($collection);
         return $collection;
     }

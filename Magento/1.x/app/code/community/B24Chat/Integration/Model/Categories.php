@@ -1,13 +1,13 @@
 <?php
 
-class B24Chat_Integration_Model_Websites
+class B24Chat_Integration_Model_Categories
 {
-    public function import($websites, $data)
+    public function import($categories, $data)
     {
         Mage::throwException('Not implemented');
     }
 
-    public function export($websites)
+    public function export($categories)
     {
         Mage::throwException('Not implemented');
     }

@@ -21,7 +21,6 @@
             <b24chat_integration_websites translate="title" module="b24chat_integration">
                 <group>b24chat_integration</group>
                 <model>b24chat_integration/api2_websites</model>
-                <filter>b24chat_integration/api2_websites_websites</filter>
                 <title>Websites</title>
                 <sort_order>10</sort_order>
                 <versions>1</versions>
@@ -30,9 +29,14 @@
                         <retrieve>1</retrieve>
                     </admin>
                 </privileges>
-                <attributes translate="website_id name" module="b24chat_integration">
+                <attributes translate="website_id code name sort_order default_group_id is_default"
+                            module="b24chat_integration">
                     <website_id>Website ID</website_id>
+                    <code>Code</code>
                     <name>Name</name>
+                    <sort_order>Sort order</sort_order>
+                    <default_group_id>Default group id</default_group_id>
+                    <is_default>Is default</is_default>
                 </attributes>
                 <routes>
                     <route>
@@ -41,12 +45,108 @@
                     </route>
                 </routes>
             </b24chat_integration_websites>
+            <b24chat_integration_categories translate="title" module="b24chat_integration">
+                <group>b24chat_integration</group>
+                <model>b24chat_integration/api2_categories</model>
+                <title>Categories</title>
+                <sort_order>20</sort_order>
+                <versions>1</versions>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id name" module="b24chat_integration">
+                    <entity_id>Entity ID</entity_id>
+                    <entity_type_id>Entity type ID</entity_type_id>
+                    <attribute_set_id>Attribute set ID</attribute_set_id>
+                    <parent_id>Parent ID</parent_id>
+                    <created_at>Created at</created_at>
+                    <updated_at>Updated at</updated_at>
+                    <path>Path</path>
+                    <position>Position</position>
+                    <level>Level</level>
+                    <children_count>Children count</children_count>
+                    <is_active>Is active</is_active>
+                    <available_sort_by>Available sort by</available_sort_by>
+                    <include_in_menu>Include in menu</include_in_menu>
+                    <name>Name</name>
+                    <description>Description</description>
+                    <meta_keywords>Meta keywords</meta_keywords>
+                    <meta_description>Meta description</meta_description>
+                    <custom_layout_update>Custom layout update</custom_layout_update>
+                    <available_sort_by>Available sort by</available_sort_by>
+                    <upsale_image_link>Upsale image link</upsale_image_link>
+                    <landing_page>Landing page</landing_page>
+                    <is_anchor>Is anchor</is_anchor>
+                    <custom_use_parent_settings>Custom use parent settings</custom_use_parent_settings>
+                    <custom_apply_to_products>Custom apply to products</custom_apply_to_products>
+                    <upsale_option>Upsale option</upsale_option>
+                    <first_top_product>First top product</first_top_product>
+                    <second_top_product>Second top product</second_top_product>
+                    <url_key>Url key</url_key>
+                    <meta_title>Meta title</meta_title>
+                    <display_mode>Display mode</display_mode>
+                    <custom_design>Custom design</custom_design>
+                    <page_layout>Page layout</page_layout>
+                    <url_path>Url path</url_path>
+                    <custom_design_from>Custom design from</custom_design_from>
+                    <custom_design_to>Custom design to</custom_design_to>
+                    <filter_price_range>Filter price range</filter_price_range>
+                </attributes>
+                <routes>
+                    <route>
+                        <route>/b24chat/categories</route>
+                        <action_type>collection</action_type>
+                    </route>
+                </routes>
+            </b24chat_integration_categories>
+            <b24chat_integration_contents translate="title" module="b24chat_integration">
+                <group>b24chat_integration</group>
+                <model>b24chat_integration/api2_contents</model>
+                <title>Contents</title>
+                <sort_order>30</sort_order>
+                <versions>1</versions>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes translate="page_id title root_template one_column meta_keywords meta_description identifier content_heading content creation_time update_time is_active sort_order layout_update_xml custom_theme custom_root_template custom_layout_update_xml custom_theme_from custom_theme_to canonical"
+                            module="b24chat_integration">
+                    <page_id>Page ID</page_id>
+                    <title>title</title>
+                    <root_template>root_template</root_template>
+                    <one_column>one_column</one_column>
+                    <meta_keywords>meta_keywords</meta_keywords>
+                    <meta_description>meta_description</meta_description>
+                    <identifier>identifier</identifier>
+                    <content_heading>content_heading</content_heading>
+                    <content>content</content>
+                    <creation_time>creation_time</creation_time>
+                    <update_time>update_time</update_time>
+                    <is_active>is_active</is_active>
+                    <sort_order>sort_order</sort_order>
+                    <layout_update_xml>layout_update_xml</layout_update_xml>
+                    <custom_theme>custom_theme</custom_theme>
+                    <custom_root_template>custom_root_template</custom_root_template>
+                    <custom_layout_update_xml>custom_layout_update_xml</custom_layout_update_xml>
+                    <custom_theme_from>custom_theme_from</custom_theme_from>
+                    <custom_theme_to>Custom theme to</custom_theme_to>
+                    <canonical>Canonical</canonical>
+                </attributes>
+                <routes>
+                    <route>
+                        <route>/b24chat/contents</route>
+                        <action_type>collection</action_type>
+                    </route>
+                </routes>
+            </b24chat_integration_contents>
             <b24chat_integration_report_viewed_products translate="title" module="b24chat_integration">
                 <group>b24chat_integration</group>
                 <model>b24chat_integration/api2_reportViewedProducts</model>
-                <filter>b24chat_integration/api2_reportViewedProducts</filter>
                 <title>Report Viewed Products</title>
-                <sort_order>20</sort_order>
+                <sort_order>40</sort_order>
                 <versions>1</versions>
                 <privileges>
                     <admin>

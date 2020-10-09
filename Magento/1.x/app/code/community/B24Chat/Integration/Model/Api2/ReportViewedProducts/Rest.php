@@ -10,7 +10,7 @@ class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_I
     protected function _retrieveCollection()
     {
         $cache = Mage::getSingleton('core/cache');
-        $key = 'B24Chat_Integration';
+        $key = 'B24Chat_Integration_report_viewed_products';
 
         if ($results = $cache->load($key)) {
             $results = unserialize($results);

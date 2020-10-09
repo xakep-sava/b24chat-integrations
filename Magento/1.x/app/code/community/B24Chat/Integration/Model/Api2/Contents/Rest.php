@@ -1,16 +1,16 @@
 <?php
 
-class B24Chat_Integration_Model_Api2_Websites_Rest extends B24Chat_Integration_Model_Api2_Websites
+class B24Chat_Integration_Model_Api2_Contents_Rest extends B24Chat_Integration_Model_Api2_Contents
 {
     /**
-     * Get websites
+     * Get contents
      *
      * @return array
      */
     protected function _retrieveCollection()
     {
         $cache = Mage::getSingleton('core/cache');
-        $key = 'B24Chat_Integration_websites_' . Mage::helper('core')
+        $key = 'B24Chat_Integration_contents_' . Mage::helper('core')
                 ->jsonEncode((Mage::app()->getRequest()->getParams()));
 
         if ($results = $cache->load($key)) {
@@ -27,12 +27,12 @@ class B24Chat_Integration_Model_Api2_Websites_Rest extends B24Chat_Integration_M
     /**
      * Retrieve collection instances
      *
-     * @return Mage_Core_Model_Resource_Website_Collection
+     * @return Mage_Cms_Model_Resource_Page_Collection
      */
     protected function _getCollectionForRetrieve()
     {
-        /** @var $collection Mage_Core_Model_Resource_Website_Collection */
-        $collection = Mage::getResourceModel('core/website_collection');
+        /** @var $collection Mage_Cms_Model_Resource_Page_Collection */
+        $collection = Mage::getResourceModel('cms/page_collection');
         $this->_applyCollectionModifiers($collection);
         return $collection;
     }
