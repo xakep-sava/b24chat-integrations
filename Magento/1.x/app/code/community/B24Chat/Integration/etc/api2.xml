@@ -56,7 +56,9 @@
                         <retrieve>1</retrieve>
                     </admin>
                 </privileges>
-                <attributes translate="entity_id name" module="b24chat_integration">
+                <attributes
+                        translate="entity_id entity_type_id attribute_set_id attribute_set_id parent_id created_at updated_at path position level children_count is_active available_sort_by include_in_menu name description meta_keywords meta_description custom_layout_update upsale_image_link landing_page is_anchor custom_use_parent_settings custom_apply_to_products upsale_option first_top_product second_top_product url_key meta_title display_mode custom_design page_layout url_path custom_design_from custom_design_to filter_price_range"
+                        module="b24chat_integration">
                     <entity_id>Entity ID</entity_id>
                     <entity_type_id>Entity type ID</entity_type_id>
                     <attribute_set_id>Attribute set ID</attribute_set_id>
@@ -75,7 +77,6 @@
                     <meta_keywords>Meta keywords</meta_keywords>
                     <meta_description>Meta description</meta_description>
                     <custom_layout_update>Custom layout update</custom_layout_update>
-                    <available_sort_by>Available sort by</available_sort_by>
                     <upsale_image_link>Upsale image link</upsale_image_link>
                     <landing_page>Landing page</landing_page>
                     <is_anchor>Is anchor</is_anchor>
@@ -112,26 +113,27 @@
                         <retrieve>1</retrieve>
                     </admin>
                 </privileges>
-                <attributes translate="page_id title root_template one_column meta_keywords meta_description identifier content_heading content creation_time update_time is_active sort_order layout_update_xml custom_theme custom_root_template custom_layout_update_xml custom_theme_from custom_theme_to canonical"
-                            module="b24chat_integration">
+                <attributes
+                        translate="page_id title root_template one_column meta_keywords meta_description identifier content_heading content creation_time update_time is_active sort_order layout_update_xml custom_theme custom_root_template custom_layout_update_xml custom_theme_from custom_theme_to canonical"
+                        module="b24chat_integration">
                     <page_id>Page ID</page_id>
-                    <title>title</title>
-                    <root_template>root_template</root_template>
-                    <one_column>one_column</one_column>
-                    <meta_keywords>meta_keywords</meta_keywords>
-                    <meta_description>meta_description</meta_description>
-                    <identifier>identifier</identifier>
-                    <content_heading>content_heading</content_heading>
-                    <content>content</content>
-                    <creation_time>creation_time</creation_time>
-                    <update_time>update_time</update_time>
-                    <is_active>is_active</is_active>
-                    <sort_order>sort_order</sort_order>
-                    <layout_update_xml>layout_update_xml</layout_update_xml>
-                    <custom_theme>custom_theme</custom_theme>
-                    <custom_root_template>custom_root_template</custom_root_template>
-                    <custom_layout_update_xml>custom_layout_update_xml</custom_layout_update_xml>
-                    <custom_theme_from>custom_theme_from</custom_theme_from>
+                    <title>Title</title>
+                    <root_template>Root template</root_template>
+                    <one_column>One column</one_column>
+                    <meta_keywords>Meta keywords</meta_keywords>
+                    <meta_description>Meta description</meta_description>
+                    <identifier>Identifier</identifier>
+                    <content_heading>Content heading</content_heading>
+                    <content>Content</content>
+                    <creation_time>Creation time</creation_time>
+                    <update_time>Update time</update_time>
+                    <is_active>Is active</is_active>
+                    <sort_order>Sort order</sort_order>
+                    <layout_update_xml>Layout update xml</layout_update_xml>
+                    <custom_theme>Custom theme</custom_theme>
+                    <custom_root_template>Custom root template</custom_root_template>
+                    <custom_layout_update_xml>Custom layout update xml</custom_layout_update_xml>
+                    <custom_theme_from>Custom theme from</custom_theme_from>
                     <custom_theme_to>Custom theme to</custom_theme_to>
                     <canonical>Canonical</canonical>
                 </attributes>
