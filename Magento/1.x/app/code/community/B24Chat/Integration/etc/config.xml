@@ -2,7 +2,7 @@
 <config>
     <modules>
         <B24Chat_Integration>
-            <version>1.1.0</version>
+            <version>1.1.1</version>
         </B24Chat_Integration>
     </modules>
     <global>
@@ -50,13 +50,30 @@
             </updates>
         </layout>
     </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <B24Chat_Integration>
+                    <files>
+                        <default>b24chat/B24Chat_Integration.csv</default>
+                    </files>
+                </B24Chat_Integration>
+            </modules>
+        </translate>
+    </adminhtml>
     <default>
         <b24chat_integration>
             <general>
                 <enabled>0</enabled>
+                <widget_enabled>1</widget_enabled>
                 <token><![CDATA[]]></token>
                 <api_url><![CDATA[https://b24chat.com]]></api_url>
             </general>
+            <cache_time>
+                <widget>60</widget>
+                <recommended>60</recommended>
+                <interactive>180</interactive>
+            </cache_time>
         </b24chat_integration>
     </default>
 </config>
