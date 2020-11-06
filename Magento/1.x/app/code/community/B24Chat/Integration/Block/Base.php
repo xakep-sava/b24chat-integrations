@@ -16,8 +16,6 @@ class B24Chat_Integration_Block_Base extends Mage_Core_Block_Template
 
         $helper = Mage::helper('b24chat_integration');
         $this->cacheLifeTime = $helper->getCacheTime($this->entity);
-
-        echo $this->cacheLifeTime;
     }
 
     /**
