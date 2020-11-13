@@ -8,3 +8,4 @@ Available modules:
 
 Coming soon:
 - WordPress
+- Bitrix
