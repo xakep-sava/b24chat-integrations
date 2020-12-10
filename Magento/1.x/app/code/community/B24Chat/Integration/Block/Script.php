@@ -10,44 +10,85 @@ class B24Chat_Integration_Block_Script extends B24Chat_Integration_Block_Base
      */
     protected function _toHtml()
     {
+        // TODO: аналитику нужно поместить в head для большей точности
         $helper = Mage::helper('b24chat_integration');
-        if (!$helper->isWidgetEnabled()) {
-            return '';
-        }
-
-        $cacheKey = $this->_getCacheKey('script');
-        $cacheScript = Mage::app()->loadCache($cacheKey);
+        $cacheKeyCustomer = $this->_getCacheKey('customer');
+        $cacheCustomer = Mage::app()->loadCache($cacheKeyCustomer);
+        $analytics = '';
+        $widget = '';
 
         if (!empty($cacheScript)) {
-            $script = unserialize($cacheScript);
+            $customer = unserialize($cacheCustomer);
         } else {
-            $script = $this->getJS($helper);
-            $this->_saveCache($cacheKey, $script);
+            $customer = $this->getCustomer($helper);
+            $this->_saveCache($cacheKeyCustomer, $customer);
         }
 
-        return $script;
+        if ($helper->isAnalyticsEnabled()) {
+            $analytics = $this->getAnalyticsJS($helper);
+        }
+
+        if ($helper->isWidgetEnabled()) {
+            $widget = $this->getWidgetJS($helper);
+        }
+
+        return $analytics . $customer . $widget;
     }
 
     /**
      * @param $helper
      * @return string
      */
-    private function getJS($helper)
+    private function getWidgetJS($helper)
     {
-        $customerInfo = '';
+        return '<script src="' . $helper->getApiUrl() . '/init.js?v=' . $helper->getModuleVersion() .
+            '" api="{&quot;url&quot;:&quot;' . $helper->getApiUrl() .
+            '/&quot;,&quot;widgets&quot;:{&quot;token&quot;:&quot;' . $helper->getToken() . '&quot;}}"></script>';
+    }
+
+    /**
+     * @param $helper
+     * @return string
+     */
+    private function getAnalyticsJS($helper)
+    {
+        return '<script id="b24chat-a" defer src="' . $helper->getApiUrl() . '/a.js?v=' . $helper->getModuleVersion() .
+            '" token="' . $helper->getToken() . '"></script>';
+    }
+
+    /**
+     * @param $helper
+     * @return string
+     */
+    private function getCustomer($helper)
+    {
+        $customerData = '';
         if ($customer = $helper->getCustomer()) {
             $primaryAddress = $customer->getPrimaryBillingAddress();
-            $name = sprintf('%s %s', $customer->getFirstname(), $customer->getLastname());
-            $phone = $primaryAddress ? sprintf(', phone: "%s"', $primaryAddress->getTelephone()) : '';
+            $customerData .= $customer->getFirstname() ? sprintf(', firstName: "%s"', $customer->getFirstname()) : '';
+            $customerData .= $customer->getLastname() ? sprintf(', lastName: "%s"', $customer->getLastname()) : '';
+            $customerData .= $customer->getGender() ?
+                sprintf(', gender: "%s"', $customer->getGender() === '1' ? 'man' : 'woman') : '';
+
+            if ($primaryAddress) {
+                $customerData .= $primaryAddress->getCity()
+                    ? sprintf(', city: "%s"', $primaryAddress->getCity()) : '';
+                $customerData .= $primaryAddress->getCountry()
+                    ? sprintf(', country: "%s"', $primaryAddress->getCountry()) : '';
+                $customerData .= $primaryAddress->getPostcode()
+                    ? sprintf(', postcode: "%s"', $primaryAddress->getPostcode()) : '';
+                $customerData .= $primaryAddress->getSteet()
+                    ? sprintf(', street: "%s"', $primaryAddress->getSteet()) : '';
+                $customerData .= $primaryAddress->getTelephone() ?
+                    sprintf(', phone: "%s"', $primaryAddress->getTelephone()) : '';
+            }
 
             // TODO: защитить json от левых символов
-            $customerInfo = sprintf(
-                '<script>window.B24Chat = { customer: { id: %d, email: "%s", name: "%s"%s } }</script>', $customer
-                ->getId(), $customer->getEmail(), $name, $phone);
+            $customerData = sprintf(
+                '<script>if(!window.B24Chat){window.B24Chat = {}} window.B24Chat.customer = { id: %d, email: "%s"%s}</script>',
+                $customer->getId(), $customer->getEmail(), $customerData);
         }
 
-        return '<script src="' . $helper->getApiUrl() . '/init.js" api="{&quot;url&quot;:&quot;' . $helper->getApiUrl()
-            . '/&quot;,&quot;widgets&quot;:{&quot;token&quot;:&quot;' . $helper->getToken() . '&quot;}}"></script>'
-            . $customerInfo;
+        return $customerData;
     }
 }

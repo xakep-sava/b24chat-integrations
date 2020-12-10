@@ -23,6 +23,17 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
             && $this->isEnabled();
     }
 
+    public function isAnalyticsEnabled()
+    {
+        return Mage::getStoreConfigFlag('b24chat_integration/general/analytics_enabled')
+            && $this->isEnabled();
+    }
+
+    public function getModuleVersion()
+    {
+        return Mage::getConfig()->getNode('modules/B24Chat_Integration/version');
+    }
+
     public function getToken()
     {
         return Mage::getStoreConfig('b24chat_integration/general/token');
@@ -30,7 +41,7 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getApiUrl()
     {
-        return Mage::getStoreConfig('b24chat_integration/general/api_url');
+        return 'http://localhost:3070';//Mage::getStoreConfig('b24chat_integration/general/api_url');
     }
 
     public function getCustomer()
@@ -45,13 +56,12 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig("b24chat_integration/cache_time/$block");
     }
 
-    public function sendData($action = 'none', $data = [])
+    public function sendData($action = 'a', $type = 'none', $data = [])
     {
         // TODO: защита токеном от спама
-        // TODO: async curl
         try {
-            $data = json_encode(array_merge(['action' => $action], $data));
-            $ch = curl_init($this->getApiUrl() . '/api/v1/webhook/magento');
+            $data = json_encode(array_merge(['action' => $type], $data));
+            $ch = curl_init($this->getApiUrl() . '/api/v1/webhook/' . $action);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -61,11 +71,17 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
             ]);
             curl_exec($ch);
 
-//            if ($error = curl_error($ch)) {
-//              $this->addLog('sendData (error)', json_encode($error));
-//            }
-        } catch (Exception $e) {
-//            $this->addLog('sendData (error)', json_encode($e));
+            if ($error = curl_error($ch)) {
+                $this->addLog('B24Chat_Integration_Helper_Data - sendData', 'error', json_encode($error));
+            }
+        } catch (Exception $error) {
+            $this->addLog('B24Chat_Integration_Helper_Data - sendData', 'error', json_encode($error));
         }
+    }
+
+    public function addLog($method, $type, $message)
+    {
+        // TODO: отправка ошибок к нам
+        Mage::log(sprintf('%s (%s): %s', $method, $type, $message), null, 'b24chat_integration.log', true);
     }
 }

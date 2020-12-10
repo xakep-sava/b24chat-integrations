@@ -14,7 +14,8 @@ class B24Chat_Integration_Helper_Api extends Mage_Core_Helper_Abstract
     public function get($action = '', $url = 'https://b24chat.com') // TODO: url from take settings
     {
         // TODO: защита токеном от спама
-        // TODO: async curl
+        $helper = Mage::helper('b24chat_integration');
+
         try {
             $ch = curl_init(sprintf('%s/api/v1/%s', $url, $action));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -25,7 +26,7 @@ class B24Chat_Integration_Helper_Api extends Mage_Core_Helper_Abstract
             curl_close($ch);
 
             if ($error = curl_error($ch)) {
-//              $this->addLog('sendData (error)', json_encode($error));
+                $helper->addLog('B24Chat_Integration_Helper_Api - get', 'error', json_encode($error));
                 return false;
             }
 
@@ -34,12 +35,12 @@ class B24Chat_Integration_Helper_Api extends Mage_Core_Helper_Abstract
                     $response = json_decode($response);
                 }
                 return $response->success ? $response : false;
-            } catch (Exception $e) {
-                // $this->addLog('sendData (error)', json_encode($e));
+            } catch (Exception $error) {
+                $helper->addLog('B24Chat_Integration_Helper_Api - get', 'error', json_encode($error));
                 return false;
             }
-        } catch (Exception $e) {
-//            $this->addLog('sendData (error)', json_encode($e));
+        } catch (Exception $error) {
+            $helper->addLog('B24Chat_Integration_Helper_Api - get', 'error', json_encode($error));
             return false;
         }
     }
