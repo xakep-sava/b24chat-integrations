@@ -41,7 +41,7 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getApiUrl()
     {
-        return 'http://localhost:3070';//Mage::getStoreConfig('b24chat_integration/general/api_url');
+        return Mage::getStoreConfig('b24chat_integration/general/api_url');
     }
 
     public function getCustomer()
