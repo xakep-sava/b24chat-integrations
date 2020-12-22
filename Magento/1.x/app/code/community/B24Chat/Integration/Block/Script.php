@@ -12,17 +12,8 @@ class B24Chat_Integration_Block_Script extends B24Chat_Integration_Block_Base
     {
         // TODO: аналитику нужно поместить в head для большей точности
         $helper = Mage::helper('b24chat_integration');
-        $cacheKeyCustomer = $this->_getCacheKey('customer');
-        $cacheCustomer = Mage::app()->loadCache($cacheKeyCustomer);
         $analytics = '';
         $widget = '';
-
-        if (!empty($cacheScript)) {
-            $customer = unserialize($cacheCustomer);
-        } else {
-            $customer = $this->getCustomer($helper);
-            $this->_saveCache($cacheKeyCustomer, $customer);
-        }
 
         if ($helper->isAnalyticsEnabled()) {
             $analytics = $this->getAnalyticsJS($helper);
@@ -32,7 +23,7 @@ class B24Chat_Integration_Block_Script extends B24Chat_Integration_Block_Base
             $widget = $this->getWidgetJS($helper);
         }
 
-        return $analytics . $customer . $widget;
+        return $analytics . $this->getAnalyticsData($helper) . $widget;
     }
 
     /**
@@ -60,10 +51,21 @@ class B24Chat_Integration_Block_Script extends B24Chat_Integration_Block_Base
      * @param $helper
      * @return string
      */
-    private function getCustomer($helper)
+    private function getAnalyticsData($helper)
     {
+        $analyticsData = '';
         $customerData = '';
-        if ($customer = $helper->getCustomer()) {
+        $categoryData = '';
+        $productData = '';
+
+        $cacheKeyCustomer = $this->_getCacheKey('customer');
+        $cacheCustomer = Mage::app()->loadCache($cacheKeyCustomer);
+
+        if (!empty($cacheCustomer)) {
+            $customerData = unserialize($cacheCustomer);
+        }
+
+        if (empty($customerData) && Mage::getSingleton('customer/session')->isLoggedIn() && $customer = $helper->getCustomer()) {
             $primaryAddress = $customer->getPrimaryBillingAddress();
             $customerData .= $customer->getFirstname() ? sprintf(', firstName: "%s"', $customer->getFirstname()) : '';
             $customerData .= $customer->getLastname() ? sprintf(', lastName: "%s"', $customer->getLastname()) : '';
@@ -83,12 +85,31 @@ class B24Chat_Integration_Block_Script extends B24Chat_Integration_Block_Base
                     sprintf(', phone: "%s"', $primaryAddress->getTelephone()) : '';
             }
 
-            // TODO: защитить json от левых символов
-            $customerData = sprintf(
-                '<script>if(!window.B24Chat){window.B24Chat = {}} window.B24Chat.customer = { id: %d, email: "%s"%s}</script>',
-                $customer->getId(), $customer->getEmail(), $customerData);
+            $customerData = sprintf('window.B24Chat.customer = { id: %d, email: "%s"%s};', $customer->getId(),
+                $customer->getEmail(), $customerData);
+            $this->_saveCache($cacheKeyCustomer, $customerData);
+        } else {
+            $customerData = '';
+            $this->_saveCache($cacheKeyCustomer, $customerData);
         }
 
-        return $customerData;
+        $product = Mage::registry('current_product');
+        if ($product) {
+            $productData = sprintf('window.B24Chat.product = { id: %d };', $product->getId());
+        }
+
+        $category = Mage::registry('current_category');
+        if ($category) {
+            $categoryData = sprintf('window.B24Chat.category = { id: %d };', $category->getId());
+        }
+
+        if (!empty($customerData) || !empty($productData) || !empty($categoryData)) {
+            // TODO: защитить json от левых символов
+            $analyticsData = sprintf(
+                '<script>if(!window.B24Chat){window.B24Chat = {}}%s%s%s</script>',
+                $productData, $customerData, $categoryData);
+        }
+
+        return $analyticsData;
     }
 }

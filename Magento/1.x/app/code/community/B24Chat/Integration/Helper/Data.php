@@ -47,7 +47,6 @@ class B24Chat_Integration_Helper_Data extends Mage_Core_Helper_Abstract
     public function getCustomer()
     {
         $customerSession = Mage::getSingleton('customer/session');
-
         return $customerSession->isLoggedIn() ? $customerSession->getCustomer() : null;
     }
 

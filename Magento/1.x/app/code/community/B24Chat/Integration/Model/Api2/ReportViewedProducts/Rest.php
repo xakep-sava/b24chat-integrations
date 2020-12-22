@@ -6,6 +6,7 @@ class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_I
      * Get report viewed products
      *
      * @return array
+     * @throws Exception
      */
     protected function _retrieveCollection()
     {
@@ -36,13 +37,14 @@ class B24Chat_Integration_Model_Api2_ReportViewedProducts_Rest extends B24Chat_I
                 . 'WHERE attribute_id = (SELECT attribute_id FROM ' . $eavAttributeTable . ' '
                 . 'WHERE attribute_code LIKE "status") AND value = 1) AS ACTIVE ON product_id = ACTIVE.entity_id '
 
-                // Stock
+                // Stock for simple product
                 . 'JOIN (SELECT ' . $catalogProductEntityTable . '.entity_id, ' . $catalogInventoryStockItemTable
                 . '.qty, stock_status FROM ' . $catalogProductEntityTable . ' '
                 . 'JOIN ' . $catalogInventoryStockItemTable . ' ON ' . $catalogProductEntityTable . '.entity_id = '
                 . $catalogInventoryStockItemTable . '.product_id ' . 'JOIN ' . $catalogInventoryStockStatusTable . ' '
                 . 'ON ' . $catalogProductEntityTable . '.entity_id = ' . $catalogInventoryStockStatusTable
-                . '.product_id WHERE ' . $catalogInventoryStockItemTable . '.qty > 0 AND stock_status = 1) AS STOCK '
+                . '.product_id WHERE (' . $catalogInventoryStockItemTable . '.qty > 0 AND stock_status = 1 AND type_id '
+                . '= "simple") OR (stock_status = 1 AND type_id != "simple")) AS STOCK '
                 . 'ON product_id = STOCK.entity_id '
 
                 . 'GROUP BY product_id) AS Rating ON Viewed.product_id = Rating.product_id';
